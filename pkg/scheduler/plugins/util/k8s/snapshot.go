@@ -53,9 +53,9 @@ func NewEmptySnapshot() *Snapshot {
 
 // NewSnapshot initializes a Snapshot struct and returns it.
 func NewSnapshot(pods []*v1.Pod, nodes []*v1.Node) *Snapshot {
-	klog.V(4).Infof("cache pods num %d", len(pods))
+	klog.V(4).Infof("list pods num %d", len(pods))
 	for _, pod := range pods {
-		klog.V(4).Infof("list pod %s", pod.String())
+		klog.V(4).Infof("list pod %s,%s", pod.Namespace,pod.Name)
 	}
 	nodeInfoMap := createNodeInfoMap(pods, nodes)
 	nodeInfoList := make([]*schedulernodeinfo.NodeInfo, 0, len(nodeInfoMap))

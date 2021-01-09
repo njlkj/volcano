@@ -188,7 +188,7 @@ func GenerateNodeMapAndSlice(nodes map[string]*api.NodeInfo) (map[string]*schedu
 	for _, node := range nodes {
 		klog.V(4).Infof("cache pods num %d", len(node.Pods()))
 		for _, pod := range node.Pods() {
-			klog.V(4).Infof("cache pod %s", pod.String())
+			klog.V(4).Infof("cache pod %s,%s", pod.Namespace,pod.Name)
 		}
 		nodeInfo := schedulernodeinfo.NewNodeInfo(node.Pods()...)
 		nodeInfo.SetNode(node.Node)
