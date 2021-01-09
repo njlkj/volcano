@@ -21,6 +21,7 @@ package k8s
 
 import (
 	"fmt"
+	"k8s.io/klog"
 
 	"k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/labels"
@@ -52,6 +53,10 @@ func NewEmptySnapshot() *Snapshot {
 
 // NewSnapshot initializes a Snapshot struct and returns it.
 func NewSnapshot(pods []*v1.Pod, nodes []*v1.Node) *Snapshot {
+	klog.V(4).Infof("cache pods num %d", len(pods))
+	for _, pod := range pods {
+		klog.V(4).Infof("list pod %s", pod.String())
+	}
 	nodeInfoMap := createNodeInfoMap(pods, nodes)
 	nodeInfoList := make([]*schedulernodeinfo.NodeInfo, 0, len(nodeInfoMap))
 	havePodsWithAffinityNodeInfoList := make([]*schedulernodeinfo.NodeInfo, 0, len(nodeInfoMap))
